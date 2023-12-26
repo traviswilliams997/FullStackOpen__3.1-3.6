@@ -31,7 +31,18 @@ app.get('/', (request, response) => {
 app.get('/api/persons', (request, response) => {
   response.json(persons)
 })
+app.get('/api/persons/:id', (request, response) => {
+    
+  const id = Number(request.params.id)    
+  const person = persons.find(person => person.id === id)
 
+  if (person) {
+      response.json(person)
+    } else {
+      response.statusMessage = "Person doesn't exist";
+      response.status(404).end()
+    }
+})
 app.get('/info', (request, response) => {
   const timestamp = Date.now()
   const requestDate = new Date(timestamp)
