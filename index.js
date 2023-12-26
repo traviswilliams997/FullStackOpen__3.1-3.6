@@ -27,6 +27,12 @@ let persons =  [
 app.get('/', (request, response) => {
   response.send('<h1>Root</h1>')
 })
+app.get('/info', (request, response) => {
+  const timestamp = Date.now()
+  const requestDate = new Date(timestamp)
+  const requestDateUTC = requestDate.toUTCString() 
+  response.send(`<p>Phonebook has info for ${persons.length} people</p> <p>${requestDateUTC}</p>`)
+})
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
@@ -43,11 +49,11 @@ app.get('/api/persons/:id', (request, response) => {
       response.status(404).end()
     }
 })
-app.get('/info', (request, response) => {
-  const timestamp = Date.now()
-  const requestDate = new Date(timestamp)
-  const requestDateUTC = requestDate.toUTCString() 
-  response.send(`<p>Phonebook has info for ${persons.length} people</p> <p>${requestDateUTC}</p>`)
+
+app.delete('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  persons = persons.filter(person => person.id !== id)
+  response.status(204).end()
 })
 
 const PORT = 3001
