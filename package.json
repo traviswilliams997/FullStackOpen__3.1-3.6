@@ -10,7 +10,9 @@
     "build:ui": "rm -rf dist && cd ../FullStackOpen/Part2/thephonebook && npm run build && cp -r dist ../../../FullStackOpen__3.1-3.6",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs"
+    "logs:prod": "fly logs",
+    "lint": "eslint ."
+
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,12 @@
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "nodemon": "^3.0.2"
   }
 }
